@@ -57,6 +57,12 @@ python3 main.py  --actor_critic_share_weights=True --batch_size=16384 --env=Poge
 ```
 The parameters are set to the values used in the paper.
 
+## Raw Data
+
+The raw data, comprising the results of our experiments for Follower and FollowerLite, can be downloaded from the following link:
+[Download Raw Data](https://github.com/AIRI-Institute/learn-to-follow/releases/download/v0/learn-to-follow-raw-data.zip)
+
+
 ## Citation:
 
 ```bibtex

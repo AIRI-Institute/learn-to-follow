@@ -1,4 +1,12 @@
-# Learn to Follow: Lifelong Multi-agent Pathfinding with Decentralized Replanning
+<div align="center">
+
+[![Example](https://raw.githubusercontent.com/Tviskaron/pogema-svg/9747a77d03ff7e13e66190da953f6c956ec44ee1/learn-to-follow-ep00001-lab-maze_010-seed0.svg)](https://github.com/AIRI-Institute/learn-to-follow) 
+
+
+
+**Learn to Follow: Lifelong Multi-agent Pathfinding with Decentralized Replanning**
+
+</div> 
 
 This study addresses the challenging problem of decentralized lifelong multi-agent pathfinding. The proposed **Follower** 
 approach utilizes a combination of a planning algorithm for constructing a long-term plan and reinforcement learning
@@ -6,6 +14,9 @@ for resolving local conflicts.
 
 **Paper:** [Learn to Follow: Decentralized Lifelong Multi-agent Pathfinding via Planning and Learning
 ](https://arxiv.org/abs/2310.01207)
+
+
+
 ## Installation:
 
 ```bash

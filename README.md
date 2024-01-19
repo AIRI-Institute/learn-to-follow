@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Example](https://raw.githubusercontent.com/Tviskaron/pogema-svg/9747a77d03ff7e13e66190da953f6c956ec44ee1/learn-to-follow-ep00001-lab-maze_010-seed0.svg)](https://github.com/AIRI-Institute/learn-to-follow) 
+[![Example](https://raw.githubusercontent.com/Tviskaron/pogema-svg/main/learn-to-follow-ep00001-lab-maze_010-seed0.svg)](https://github.com/AIRI-Institute/learn-to-follow) 
 
 
 

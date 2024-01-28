@@ -13,8 +13,7 @@ PYBIND11_MODULE(planner, m) {
             .def("update_occupations", &planner::update_occupations);
 }
 
-/*
 <%
+cfg['extra_compile_args'] = ['-std=c++17']
 setup_pybind11(cfg)
 %>
-*/

@@ -1,11 +1,6 @@
 // cppimport
 #include "follower.h"
 
-int dist(std::pair<int, int> a, std::pair<int, int> b)
-{
-    return std::abs(a.first - b.first) + std::abs(a.second - b.second);
-}
-
 std::list<std::pair<int, int>> Follower::get_occupied_cells(int agent_idx)
 {
     std::pair<int, int> cur_pos = agents[agent_idx].cur_position;
@@ -50,43 +45,17 @@ int Follower::get_action(size_t agent_idx, std::pair<int, int> cur_position, std
 {
     std::list<std::pair<int, int>> occupied_cells = get_occupied_cells(agent_idx);
     planners[agent_idx].update_occupied_cells(occupied_cells, agents[agent_idx].goal);
-
-    if(!cfg.use_rl)
-    {
-        if(dis(re) < cfg.agents_as_obstacles)
-            planners[agent_idx].update_bad_cells(occupied_cells);
-        planners[agent_idx].update_path(agents[agent_idx].cur_position, agents[agent_idx].goal);
-        auto path = planners[agent_idx].get_next_node();
-        if(path.first.first == INF)
-        {
-            std::uniform_int_distribution<> distr(0, 4);
-            return distr(generators[agent_idx]);
-        }
-        else
-        {
-            std::vector<std::pair<int, int>> deltas = {{0,0}, {-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-            int action(0);
-            for(size_t i = 0; i < deltas.size(); i++)
-                if(deltas[i].first == (path.second.first - path.first.first) &&
-                   deltas[i].second == (path.second.second - path.first.second))
-                    action = i;
-            return action;
-        }
-    }
-    else
-    {
-        planners[agent_idx].update_path(agents[agent_idx].cur_position, agents[agent_idx].goal);
-        std::list<std::pair<int, int>> path = planners[agent_idx].get_path();
-        auto input = generate_input(agent_idx, actor.obs_radius, path);
-        auto result = actor.get_output({input, {0}});
-        std::vector<int> score;
-        score.reserve(result.first.size());
-        for(auto v: result.first)
-            score.push_back(static_cast<int>(v * 1e6));
-        std::discrete_distribution<int> distr(score.begin(), score.end());
-        int action = distr(generators[agent_idx]);
-        return action;
-    }
+    planners[agent_idx].update_path(agents[agent_idx].cur_position, agents[agent_idx].goal);
+    std::list<std::pair<int, int>> path = planners[agent_idx].get_path();
+    auto input = generate_input(agent_idx, actor.obs_radius, path);
+    auto result = actor.get_output({input, {0}});
+    std::vector<int> score;
+    score.reserve(result.first.size());
+    for(auto v: result.first)
+        score.push_back(static_cast<int>(v * 1e6));
+    std::discrete_distribution<int> distr(score.begin(), score.end());
+    int action = distr(generators[agent_idx]);
+    return action;
 }
 
 std::vector<int> Follower::act(std::vector<std::pair<int, int>> cur_positions, std::vector<std::pair<int, int>> goals)
@@ -120,7 +89,6 @@ std::vector<int> Follower::act(std::vector<std::pair<int, int>> cur_positions, s
 void Follower::init(const Config& cfg_, py::array_t<double> array, std::vector<std::pair<int, int>> abs_starts)
 {
     cfg = cfg_;
-    re = std::default_random_engine(cfg.seed);
     pool.reset(cfg.num_threads);
     actor = NN_module(cfg.path_to_weights);
 

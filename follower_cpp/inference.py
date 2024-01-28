@@ -21,7 +21,6 @@ class FollowerConfigCPP(FollowerInferenceConfig, extra=Extra.forbid):
     num_threads: int = 8
     path_to_weights: str = "model/follower-lite/"
     preprocessing: str = 'FollowerPreprocessingCPP'
-    use_rl: bool = True
 
 
 class FollowerInferenceCPP:
@@ -46,7 +45,6 @@ class FollowerInferenceCPP:
         self.cpp_config.use_dynamic_cost = self.cfg.training_config.preprocessing.use_dynamic_cost
         self.cpp_config.reset_dynamic_cost = self.cfg.training_config.preprocessing.reset_dynamic_cost
         self.cpp_config.seed = self.cfg.seed
-        self.cpp_config.use_rl = self.cfg.use_rl
 
         w_dir = Path(self.cfg.path_to_weights)
         self.cpp_config.path_to_weights = str(w_dir / str(w_dir.name + '.onnx'))

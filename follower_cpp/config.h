@@ -11,7 +11,6 @@ public:
     bool use_static_cost = true;
     bool use_dynamic_cost = true;
     bool reset_dynamic_cost = true;
-    bool use_rl = true;
     int obs_radius = 5;
     int num_threads = 8;
     int seed = 42;

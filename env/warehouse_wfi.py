@@ -141,7 +141,7 @@ class WarehouseWFI(Pogema):
 
 
 def create_warehouse_wfi_env(config):
-    config.grid_config.map_name = 'warehouse_wfi'
+    config.grid_config.map_name = 'wfi_warehouse'
     env = WarehouseWFI(grid_config=config.grid_config)
     env = ProvideGlobalObstacles(env)
     grid_config = env.grid_config

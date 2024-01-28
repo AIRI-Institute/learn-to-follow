@@ -53,10 +53,6 @@ class FollowerInferenceConfig(AlgoBase, extra=Extra.forbid):
         A boolean indicating whether the agent should use a batched approach during training.
     """
     name: Literal['Follower'] = 'Follower'
-    parallel_backend: Literal[
-        'multiprocessing', 'balanced_multiprocessing',
-        'dask', 'balanced_dask', 'balanced_dask_gpu_backend',
-        'sequential'] = 'balanced_dask_gpu_backend'
 
     path_to_weights: str = "model/follower"
     preprocessing: str = 'FollowerPreprocessing'
@@ -194,16 +190,3 @@ class FollowerInference:
         torch.onnx.export(self.net, ({'obs': obs_example}, rnn_example), filename,
                           input_names=input_names, output_names=output_names,
                           export_params=True)
-
-
-def main():
-    from pathlib import Path
-
-    name = 'follower-lite'
-    path = f'../experiments/{name}'
-    FollowerInference(FollowerInferenceConfig(path_to_weights=path)).to_onnx(
-        filename=Path(path) / (str(name) + '.onnx'))
-
-
-if __name__ == '__main__':
-    main()

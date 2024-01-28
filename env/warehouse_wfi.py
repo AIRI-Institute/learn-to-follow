@@ -149,8 +149,8 @@ def create_warehouse_wfi_env(config):
     if grid_config.on_target == 'restart':
         env = LifeLongAverageThroughputMetric(env)
     if config.with_animation:
-        env = AnimationMonitor(env, AnimationConfig(directory='experiments/renders',
-                                                    egocentric_idx=0,
+        env = AnimationMonitor(env, AnimationConfig(directory='renders',
+                                                    egocentric_idx=None,
                                                     show_lines=True
                                                     ))
     env = RuntimeMetricWrapper(env)

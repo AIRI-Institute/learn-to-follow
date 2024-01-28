@@ -17,10 +17,6 @@ from pydantic import Extra
 
 class FollowerConfigCPP(FollowerInferenceConfig, extra=Extra.forbid):
     name: Literal['FollowerCPP'] = 'FollowerCPP'
-    parallel_backend: Literal[
-        'multiprocessing', 'balanced_multiprocessing',
-        'dask', 'balanced_dask',
-        'sequential'] = 'balanced_dask'
     num_process: int = 8
     num_threads: int = 8
     path_to_weights: str = "model/follower-lite/"

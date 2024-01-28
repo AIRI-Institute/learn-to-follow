@@ -2,6 +2,9 @@
 
 [![Example](https://raw.githubusercontent.com/Tviskaron/pogema-svg/main/learn-to-follow-ep00001-lab-maze_010-seed0.svg)](https://github.com/AIRI-Institute/learn-to-follow) 
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1CnC47qbc4Z3sHfiR6sIX0ngXi6UfTx8o?usp=sharing)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AIRI-Institute/learn-to-follow/blob/main/LICENSE)
+[![arXiv](https://img.shields.io/badge/arXiv-2310.01207-b31b1b.svg)](https://arxiv.org/abs/2310.01207)
 
 
 **Learn to Follow: Lifelong Multi-agent Pathfinding with Decentralized Replanning**
@@ -44,6 +47,8 @@ To execute the **Follower** algorithm and produce an animation using pre-trained
 python3 example.py
 ```
 
+The animation will be stored in the `renders` folder.
+
 It's recommended to set environment variable to restrict Numpy CPU threads to 1,  avoiding performance issues:
 
 ```bash
@@ -52,6 +57,15 @@ export MKL_NUM_THREADS="1"
 export OPENBLAS_NUM_THREADS="1"
 ```
 
+You can adjust the environment and algorithm parameter using arguments. For example:
+```
+python3 example.py --map_name wfi_warehouse --num_agents 128
+python3 example.py --map_name pico_s00_od20_na32 --num_agents 32 --algorithm FollowerLite
+```
+
+
+We offer a Google Colab example that simplifies the process:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1CnC47qbc4Z3sHfiR6sIX0ngXi6UfTx8o?usp=sharing)
 
 
 ## Training:

@@ -22,12 +22,10 @@ environment:
         pico_s39_od0_na32,
       ]
     num_agents:
-      grid_search: [ 8, 16, 32, 64 ]
+      grid_search: [ 8, 16]
     seed:
-      grid_search: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+      grid_search: [ 0, 1, ]
 algorithms:
-#  A*:
-#    name: A*
   Follower:
     name: Follower
     parallel_backend: balanced_dask
@@ -36,6 +34,10 @@ algorithms:
     name: FollowerLite
     parallel_backend: balanced_dask
     num_process: 4
-#  FollowerLite:
-#    name: FollowerCPP
+results_views:
+  TabularView:
+    type: tabular
+    drop_keys: [ seed, map_name ]
+    print_results: True
+
 

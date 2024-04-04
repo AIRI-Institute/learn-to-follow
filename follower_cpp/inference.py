@@ -1,4 +1,5 @@
 from follower.inference import FollowerInferenceConfig
+from follower.preprocessing import PreprocessorConfig
 # noinspection PyUnresolvedReferences
 from utils import fix_num_threads_issue
 
@@ -20,7 +21,7 @@ class FollowerConfigCPP(FollowerInferenceConfig, extra=Extra.forbid):
     num_process: int = 8
     num_threads: int = 8
     path_to_weights: str = "model/follower-lite/"
-    preprocessing: str = 'FollowerPreprocessingCPP'
+    preprocessing: PreprocessorConfig = PreprocessorConfig()
 
 
 class FollowerInferenceCPP:

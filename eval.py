@@ -2,7 +2,7 @@ from pogema_toolbox.create_env import create_env_base, Environment
 from pogema_toolbox.evaluator import evaluation
 from pogema import BatchAStarAgent
 
-from pogema_toolbox.eval_utils import initialize_wandb, save_evaluation_results, create_and_push_summary_archive
+from pogema_toolbox.eval_utils import initialize_wandb, save_evaluation_results
 
 from pathlib import Path
 import wandb
@@ -23,8 +23,8 @@ BASE_PATH = Path('experiments')
 def main(disable_wandb=True):
     ToolboxRegistry.register_env('Pogema-v0', create_env_base, Environment)
     ToolboxRegistry.register_algorithm('A*', BatchAStarAgent)
-    ToolboxRegistry.register_algorithm('Follower', FollowerInference, FollowerInferenceConfig, follower_preprocessor)
-
+    ToolboxRegistry.register_algorithm('Follower', FollowerInference, FollowerInferenceConfig,
+                                       follower_preprocessor)
     ToolboxRegistry.register_algorithm('FollowerLite', FollowerInferenceCPP, FollowerConfigCPP,
                                        follower_cpp_preprocessor)
 

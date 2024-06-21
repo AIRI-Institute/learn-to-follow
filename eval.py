@@ -20,7 +20,7 @@ PROJECT_NAME = 'pogema-toolbox'
 BASE_PATH = Path('experiments')
 
 
-def main(disable_wandb=True):
+def main(disable_wandb=False):
     ToolboxRegistry.register_env('Pogema-v0', create_env_base, Environment)
     ToolboxRegistry.register_algorithm('A*', BatchAStarAgent)
     ToolboxRegistry.register_algorithm('Follower', FollowerInference, FollowerInferenceConfig,

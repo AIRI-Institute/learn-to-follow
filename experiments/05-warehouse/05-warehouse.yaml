@@ -13,6 +13,9 @@ environment:
 algorithms:
   Follower:
     name: Follower
+    num_process: 4
+    parallel_backend: 'balanced_dask'
+
 
   No dynamic cost:
     name: Follower
@@ -32,7 +35,7 @@ algorithms:
     override_config:
       preprocessing:
         use_static_cost: False
-
+        
 results_views:
   TabularResults:
     type: tabular

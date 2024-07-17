@@ -41,7 +41,7 @@ algorithms:
 results_views:
   TabularView:
     type: tabular
-    drop_keys: [ seed ]
+    drop_keys: [ seed, map_name]
     print_results: True
   
   01-random:

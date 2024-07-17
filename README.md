@@ -107,15 +107,25 @@ environment:
 algorithms:
   Follower:
     name: Follower
+    num_process: 4
+    parallel_backend: 'balanced_dask'
+
 
   No dynamic cost:
     name: Follower
+    num_process: 4
+    parallel_backend: 'balanced_dask'
+    
     override_config:
       preprocessing:
         use_dynamic_cost: False
 
   No static cost:
     name: Follower
+    num_process: 4
+    num_threads: 4
+    parallel_backend: 'balanced_dask'
+    
     override_config:
       preprocessing:
         use_static_cost: False

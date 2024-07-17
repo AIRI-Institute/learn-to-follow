@@ -147,7 +147,7 @@ results_views:
 
 The configuration defines the environment settings and the algorithms used for the experiments. It specifies the following:
 - **Environment**: Includes parameters of the POGEMA environment, behavior on target (restart, corresponding to LifeLong), maximum episode steps (512), observation type, collision system, etc. It also sets up grid searches for the number of agents and seed values. The `grid_search` can be used for any environment parameter.
-- **Algorithms**: Details the algorithms to be tested. The primary algorithm is **Follower**. Variants include "No dynamic cost" and "No static cost," which override specific preprocessing configurations.
+- **Algorithms**: Details the algorithms to be tested. The primary algorithm is **Follower**. Variants include "No dynamic cost" and "No static cost," which override specific preprocessing configurations. All algorithms are configurable to use `4` processes and the `balanced_dask` backend for parallelization, enhancing computational efficiency.
 - **Results Views**: Defines how the results will be presented, including tabular and plot views.
 
 This example configuration demonstrates how to set up experiments for the Pogema-v0 environment, varying the number of agents and seeds, and comparing different versions of the Follower algorithm.

@@ -30,9 +30,7 @@ def create_env_base(config: Environment):
     if config.use_maps:
         env = MultiMapWrapper(env)
     if config.with_animation:
-        env = AnimationMonitor(env, AnimationConfig(directory='renders',
-                                                    egocentric_idx=None,
-                                                    show_lines=True))
+        env = AnimationMonitor(env, AnimationConfig(directory='renders', egocentric_idx=None))
 
     # adding runtime metrics
     env = RuntimeMetricWrapper(env)

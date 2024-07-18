@@ -2,7 +2,6 @@ import argparse
 
 from env.create_env import create_env_base
 from env.custom_maps import MAPS_REGISTRY
-from env.warehouse_wfi import create_warehouse_wfi_env
 from utils.eval_utils import run_episode
 from follower.training_config import EnvironmentMazes
 from follower.inference import FollowerInferenceConfig, FollowerInference
@@ -17,8 +16,6 @@ def create_custom_env(cfg):
     env_cfg.grid_config.map_name = cfg.map_name
     env_cfg.grid_config.seed = cfg.seed
     env_cfg.grid_config.max_episode_steps = cfg.max_episode_steps
-    if cfg.map_name == 'wfi_warehouse':
-        return create_warehouse_wfi_env(env_cfg)
     return create_env_base(env_cfg)
 
 
@@ -58,7 +55,6 @@ def main():
     if args.show_map_names:
         for map_ in MAPS_REGISTRY:
             print(map_)
-        print('wfi_warehouse')
         return
 
     if args.algorithm == 'FollowerLite':

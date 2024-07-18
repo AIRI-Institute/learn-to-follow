@@ -1,3 +1,6 @@
+from pogema_toolbox.algorithm_config import AlgoBase
+
+from follower.preprocessing import PreprocessorConfig
 # noinspection PyUnresolvedReferences
 from utils import fix_num_threads_issue
 
@@ -32,7 +35,7 @@ from sample_factory.algo.utils.make_env import make_env_func_batched
 from sample_factory.utils.attr_dict import AttrDict
 from sample_factory.algo.utils.rl_utils import prepare_and_normalize_obs
 
-from follower.algorithm_utils import AlgoBase
+# from follower.algorithm_utils import AlgoBase
 
 from follower.register_training_utils import register_custom_model
 
@@ -55,7 +58,7 @@ class FollowerInferenceConfig(AlgoBase, extra=Extra.forbid):
     name: Literal['Follower'] = 'Follower'
 
     path_to_weights: str = "model/follower"
-    preprocessing: str = 'FollowerPreprocessing'
+    preprocessing: PreprocessorConfig = PreprocessorConfig()
     override_config: Optional[dict] = None
     training_config: Optional[Experiment] = None
     custom_path_to_weights: Optional[str] = None
@@ -121,7 +124,7 @@ class FollowerInference:
 
         checkpoints = Learner.get_checkpoints(os.path.join(self.path, f"checkpoint_p{policy_index}"),
                                               f"{name_prefix}_*")
-        # print(checkpoints), exit(0)
+
         if self.algo_cfg.custom_path_to_weights:
             checkpoints = [self.algo_cfg.custom_path_to_weights]
 

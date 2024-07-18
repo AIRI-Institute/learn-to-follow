@@ -1,7 +1,7 @@
 import time
 
 import numpy as np
-from pogema.animation import AnimationConfig, AnimationMonitor
+from pogema import AnimationConfig, AnimationMonitor
 
 from pogema import pogema_v0
 

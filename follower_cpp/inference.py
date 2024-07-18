@@ -1,4 +1,5 @@
 from follower.inference import FollowerInferenceConfig
+from follower.preprocessing import PreprocessorConfig
 # noinspection PyUnresolvedReferences
 from utils import fix_num_threads_issue
 
@@ -16,11 +17,11 @@ from pydantic import Extra
 
 
 class FollowerConfigCPP(FollowerInferenceConfig, extra=Extra.forbid):
-    name: Literal['FollowerCPP'] = 'FollowerCPP'
+    name: Literal['FollowerLite'] = 'FollowerLite'
     num_process: int = 8
     num_threads: int = 8
     path_to_weights: str = "model/follower-lite/"
-    preprocessing: str = 'FollowerPreprocessingCPP'
+    preprocessing: PreprocessorConfig = PreprocessorConfig()
 
 
 class FollowerInferenceCPP:

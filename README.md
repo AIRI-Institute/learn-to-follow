@@ -5,7 +5,7 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1CnC47qbc4Z3sHfiR6sIX0ngXi6UfTx8o?usp=sharing)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AIRI-Institute/learn-to-follow/blob/main/LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-2310.01207-b31b1b.svg)](https://arxiv.org/abs/2310.01207)
-
+[![Paper](https://img.shields.io/badge/AAAI-2024-blue)](https://ojs.aaai.org/index.php/AAAI/article/view/29704)
 
 **Learn to Follow: Lifelong Multi-agent Pathfinding with Decentralized Replanning**
 
@@ -82,7 +82,76 @@ python3 main.py  --actor_critic_share_weights=True --batch_size=16384 --env=Poge
 ```
 The parameters are set to the values used in the paper.
 
-## Raw Data
+### Testing and Results Visualization 
+To reproduce the main results of **Follower** and **FollowerLite** using [pogema-toolbox](https://github.com/AIRI-Institute/pogema-toolbox), use the following command:
+```bash
+python3 eval.py
+```
+This script will run all the experiments, the configurations for which are placed in the experiments folder. The raw data will be saved in the corresponding folders (including plots) and optionally saved to wandb.
+
+#### Example Configuration:
+
+```yaml
+environment:
+  name: Pogema-v0
+  on_target: restart
+  max_episode_steps: 512
+  observation_type: POMAPF
+  collision_system: soft  
+  map_name: wfi_warehouse
+  num_agents:
+    grid_search: [ 32, 64, 96, 128, 160, 192 ]
+  seed:
+    grid_search: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+algorithms:
+  Follower:
+    name: Follower
+    num_process: 4
+    parallel_backend: 'balanced_dask'
+
+
+  No dynamic cost:
+    name: Follower
+    num_process: 4
+    parallel_backend: 'balanced_dask'
+    
+    override_config:
+      preprocessing:
+        use_dynamic_cost: False
+
+  No static cost:
+    name: Follower
+    num_process: 4
+    num_threads: 4
+    parallel_backend: 'balanced_dask'
+    
+    override_config:
+      preprocessing:
+        use_static_cost: False
+
+results_views:
+  TabularResults:
+    type: tabular
+    drop_keys: [ seed ]
+    print_results: True
+
+  05-warehouse:
+    type: plot
+    x: num_agents
+    y: avg_throughput
+    name: Warehouse $46 \times 33$
+```
+
+#### Description of Configuration:
+
+The configuration defines the environment settings and the algorithms used for the experiments. It specifies the following:
+- **Environment**: Includes parameters of the POGEMA environment, behavior on target (restart, corresponding to LifeLong), maximum episode steps (512), observation type, collision system, etc. It also sets up grid searches for the number of agents and seed values. The `grid_search` can be used for any environment parameter.
+- **Algorithms**: Details the algorithms to be tested. The primary algorithm is **Follower**. Variants include "No dynamic cost" and "No static cost," which override specific preprocessing configurations. All algorithms are configurable to use `4` processes and the `balanced_dask` backend for parallelization, enhancing computational efficiency.
+- **Results Views**: Defines how the results will be presented, including tabular and plot views.
+
+This example configuration demonstrates how to set up experiments for the Pogema-v0 environment, varying the number of agents and seeds, and comparing different versions of the Follower algorithm.
+#### Raw Data
 
 The raw data, comprising the results of our experiments for Follower and FollowerLite, can be downloaded from the following link:
 [Download Raw Data](https://github.com/AIRI-Institute/learn-to-follow/releases/download/v0/learn-to-follow-raw-data.zip)
@@ -91,11 +160,14 @@ The raw data, comprising the results of our experiments for Follower and Followe
 ## Citation:
 
 ```bibtex
-@article{skrynnik2023learn,
-  title={Learn to Follow: Decentralized Lifelong Multi-agent Pathfinding via Planning and Learning},
+@inproceedings{skrynnik2024learn,
+  title={Learn to Follow: Decentralized Lifelong Multi-Agent Pathfinding via Planning and Learning},
   author={Skrynnik, Alexey and Andreychuk, Anton and Nesterova, Maria and Yakovlev, Konstantin and Panov, Aleksandr},
-  journal={arXiv preprint arXiv:2310.01207},
-  year={2023}
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={38},
+  number={16},
+  pages={17541--17549},
+  year={2024}
 }
 ```
 
